@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NAVRUP INDIA — HR V3</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="login" class="login">
+  <div class="login-card"><h1>NAVRUP INDIA</h1><p>HR Management — V3</p>
+    <input id="uid" placeholder="User ID" value="">
+    <input id="pwd" type="password" placeholder="Password">
+    <button onclick="login()">Login</button><small>Free version • Browser storage</small>
+  </div>
+</div>
+<div id="app" class="hidden">
+<header><div><b>NAVRUP INDIA</b><span> HR Management • V3</span></div><button class="logout" onclick="logout()">Logout</button></header>
+<nav>
+<button onclick="show('dashboard')">Dashboard</button><button onclick="show('employees')">Employees</button>
+<button onclick="show('attendance')">Attendance</button><button onclick="show('documents')">Documents</button>
+</nav>
+<main>
+<section id="dashboard" class="page"><h2>HR Dashboard</h2><div class="cards"><div><b id="empCount">0</b><span>Employees</span></div><div><b id="attCount">0</b><span>Attendance</span></div><div><b>3</b><span>Document Types</span></div></div><div class="panel"><h3>Document Centre</h3><p>Generate Salary Slip, Service / Experience Certificate and Relieving Letter from employee records.</p></div></section>
+
+<section id="employees" class="page hidden"><h2>Employee Management</h2>
+<div class="panel"><form id="empForm" onsubmit="addEmployee(event)" class="grid">
+<input id="name" placeholder="Employee Name" required><input id="designation" placeholder="Designation" required>
+<input id="department" placeholder="Department"><input id="join" type="date" placeholder="Joining Date">
+<input id="salary" type="number" placeholder="Basic Salary"><input id="food" type="number" placeholder="Food Allowance">
+<button type="submit">Add Employee</button></form></div><div class="panel"><table><thead><tr><th>Name</th><th>Designation</th><th>Joining</th><th>Basic</th><th>Action</th></tr></thead><tbody id="empTable"></tbody></table></div>
+</section>
+
+<section id="attendance" class="page hidden"><h2>Attendance</h2><div class="panel grid">
+<select id="attEmp"></select><input id="attDate" type="date"><select id="attStatus"><option>Present</option><option>Absent</option><option>Leave</option></select><button onclick="addAttendance()">Save Attendance</button>
+</div><div class="panel"><table><thead><tr><th>Date</th><th>Employee</th><th>Status</th></tr></thead><tbody id="attTable"></tbody></table></div></section>
+
+<section id="documents" class="page hidden"><h2>HR Documents</h2>
+<div class="panel grid"><select id="docEmp" onchange="fillEmployee()"></select><select id="docType" onchange="toggleSalary()"><option value="salary">Salary Slip</option><option value="service">Service / Experience Certificate</option><option value="relieving">Relieving Letter</option></select><input id="docDate" type="date"></div>
+<div id="salaryFields" class="panel grid">
+<input id="period" placeholder="Pay Period e.g. January 2026"><input id="worked" type="number" placeholder="Worked Days" value="26">
+<input id="basic" type="number" placeholder="Basic"><input id="hra" type="number" placeholder="House Rent Allowance">
+<input id="site" type="number" placeholder="Site Allowance"><input id="medical" type="number" placeholder="Medical Allowance">
+<input id="special" type="number" placeholder="Special Allowance"><input id="food2" type="number" placeholder="Food Allowance">
+<input id="pf" type="number" placeholder="Provident Fund" value="0"><input id="pt" type="number" placeholder="Professional Tax" value="0"><input id="loan" type="number" placeholder="Loan" value="0">
+</div>
+<div id="letterFields" class="panel hidden"><textarea id="project" placeholder="Project / work details"></textarea><input id="fromDate" type="date" placeholder="From date"><input id="toDate" type="date" placeholder="To date"></div>
+<button class="generate" onclick="generateDoc()">Generate & Print / Save PDF</button>
+<div id="preview" class="preview"></div>
+</section>
+</main></div>
+<script src="app.js"></script>
+</body></html>
